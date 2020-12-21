@@ -20,8 +20,6 @@ function App() {
   return (
     <div className="todo-app">
       <div className={classes.root}>
-        <br/>
-        <br/>
         <ElevationCard />
         <br/>
         <Typography>

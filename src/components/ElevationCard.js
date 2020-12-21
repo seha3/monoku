@@ -30,8 +30,8 @@ export default function MediaCard() {
           <Typography gutterBottom variant="h5" component="h3">
             Lunes 21 Diciembre 2020
           </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            10:40
+          <Typography gutterBottom variant="h2" component="h2">
+            10:40am
           </Typography>
           <br/>
           <Typography variant="body2" color="textSecondary" component="p">
