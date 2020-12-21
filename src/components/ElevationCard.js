@@ -24,7 +24,7 @@ export default function MediaCard() {
         <CardMedia
           className={classes.media}
           image="/assets/desgrr.jpg"
-          title=""
+          title="image"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h3">
@@ -33,6 +33,7 @@ export default function MediaCard() {
           <Typography gutterBottom variant="h5" component="h2">
             10:40
           </Typography>
+          <br/>
           <Typography variant="body2" color="textSecondary" component="p">
             ¿Qué planeas hacer el día de hoy?
           </Typography>
