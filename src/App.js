@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
     alignContent: 'center',
     flexDirection: 'column'
   },
+  text: {
+    textAlign: 'center'
+  },
+  button: {
+    justifyContent: 'right'
+  }
 }));
 
 function App() {
@@ -27,13 +33,12 @@ function App() {
       <Grid className={classes.root}>
         <ElevationCard />
         <br/>
-        <Typography>
+        <Typography className={classes.text}>
           Añade las tareas que deseas realizar
         </Typography>
         <br/>
-        <TodoList />
-      </Grid>
-      
+        <TodoList className={classes.button}/>
+      </Grid>      
     </div>
   );
 }
