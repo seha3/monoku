@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-
+import axios from 'axios';
 
 const useStyles = makeStyles({
     button: {
@@ -62,7 +62,7 @@ function TodoForm(props) {
     const inputRef = useRef(null)
 
     //Modal 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -99,7 +99,24 @@ function TodoForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
+    //     let requestRegister = {
+    //             "text": input,
+    //             "notes": "tarea nueva Sil"
+    //   }
 
+    //     const fetch = async () => {
+    //         let res = await axios.post('https://monoku-tasks.herokuapp.com/jtxfoXn2me1c7Tj7B8wn/add/', requestRegister
+    //             // `${config["url-funnel"]}/v1/landing/` + idFunnel + `/prescore`, rqstService
+    //           ).then(res => {
+    //             console.log(res)
+    //           }).catch(error => {
+    //             console.log(error.response);
+    //           });
+    //         // const { data } = await axios.get('https://monoku-tasks.herokuapp.com/jtxfoXn2me1c7Tj7B8wn/all')
+    //         // .then{console.log(data)}
+    //         // setList(data)
+    //     } 
+    //     fetch()
         props.onSubmit({
             id: Math.floor(Math.random() * 10000),
             text: input
@@ -107,6 +124,30 @@ function TodoForm(props) {
 
         setInput('');
     };
+
+    //API monoku
+    useEffect(() => {
+        const fetch = async () => {
+            let res = await axios.get('https://monoku-tasks.herokuapp.com/jtxfoXn2me1c7Tj7B8wn/all'
+                // `${config["url-funnel"]}/v1/landing/` + idFunnel + `/prescore`, rqstService
+              ).then(res => {
+                console.log(res)
+              }).catch(error => {
+                console.log(error.response);
+              });
+            // const { data } = await axios.get('https://monoku-tasks.herokuapp.com/jtxfoXn2me1c7Tj7B8wn/all')
+            // .then{console.log(data)}
+            // setList(data)
+        }
+        fetch()
+    }, [])
+
+
+    // return (
+    //     list.map(
+    //         //renderizado de tus componentes todo
+    //     )
+    // )
 
 
     return (
