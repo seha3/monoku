@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-// import Modal from '@material-ui/core/Modal';
+import Modal from '@material-ui/core/Modal';
+
 
 const useStyles = makeStyles({
     button: {
@@ -30,7 +31,27 @@ const useStyles = makeStyles({
         boxSizing: "border-box",
         borderColor: '#a16791',
         color: '#216e7e'
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'start',
+        flexWrap: 'wrap',
+        margin: 'auto',
+        marginTop: 30,
+        width: 305,
+        height: 350,
+        backgroundColor: 'white',
+      },
+      h2: {
+        display: 'flex',
+        marginBottom: 10,
+        width: 280,
+        marginLeft: 25
+      },
+      text: {
+          marginLeft: 25,
+      }
   });
 
 function TodoForm(props) {
@@ -39,6 +60,34 @@ function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : '')
 
     const inputRef = useRef(null)
+
+    //Modal 
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    } 
+    
+    const body = (
+        <div className={classes.modal}>
+            <div>
+                <h2 className={classes.h2}>{input}</h2>
+                <hr />
+            </div>
+            <div className={classes.text}>
+                <p>Título</p>
+                <p>Subtítulo</p>
+                <p>Texto en bold</p>
+                <p>Texto en cursiva</p>
+                <p>Texto por defecto</p>
+            </div>
+          
+        </div>
+      ); // --> aquí termina Modal
 
     useEffect(() => {
         inputRef.current.focus()
@@ -73,6 +122,7 @@ function TodoForm(props) {
                         onChange={handleChange}
                         ref={inputRef}
                         className={classes.input}
+                        onClick={handleOpen}
                     />
                     <br/>
                     <br/>
@@ -109,6 +159,12 @@ function TodoForm(props) {
                 }
                 
             </form>
+            <Modal
+                open={open}
+                onClose={handleClose}
+            >
+                {body}
+            </Modal>
         </div>
     )
 }
