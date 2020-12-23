@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+// import Modal from '@material-ui/core/Modal';
 
 const useStyles = makeStyles({
     button: {
@@ -11,19 +11,32 @@ const useStyles = makeStyles({
       height: 48,
       padding: '0 30px',
       boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      marginLeft: 180
     },
     label: {
       textTransform: 'capitalize',
     },
     root: {
-        justifyContent: 'flex-end'
+        justifyContent: 'center'
+    },
+    input: {
+        width: 305,
+        height: 70,
+        padding: "12px 20px",
+        margin: "0 auto",
+        display: "inline-block",
+        border: "none",
+        borderRadius: "0.2rem",
+        boxSizing: "border-box",
+        borderColor: '#a16791',
+        color: '#216e7e'
     }
   });
 
 function TodoForm(props) {
     const classes = useStyles();
 
-    const [input, setInput] = useState('')
+    const [input, setInput] = useState(props.edit ? props.edit.value : '')
 
     const inputRef = useRef(null)
 
@@ -49,30 +62,52 @@ function TodoForm(props) {
 
     return (
         <div className={classes.root}>
-            <form className="todo.form" onSubmit={handleSubmit}>
-                <TextField 
-                    type="text" 
-                    style={{ margin: 8 }}
-                    placeholder="Ej. Comprar material para trabajar" 
-                    value={input}
-                    name="text>" 
-                    className="todo-input"
-                    onChange={handleChange}
-                    ref={inputRef}
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true
-                    }}
-                />
-                <br/>
-                <button 
-                    className={classes.button}
-                    value={input}
-                    onClick={handleChange}
-                >
-                    Añadir Tarea
-                </button>
+            <form onSubmit={handleSubmit}>
+                {props.edit ? (
+                    <>
+                    <input 
+                        type="text" 
+                        style={{ margin: 8 }}
+                        placeholder="Edita tu tarea" 
+                        value={input}
+                        onChange={handleChange}
+                        ref={inputRef}
+                        className={classes.input}
+                    />
+                    <br/>
+                    <br/>
+                    <button 
+                        className={classes.button}
+                        value={input}
+                        onClick={handleChange}
+                    >
+                        Editar Tarea
+                    </button>
+                    </>
+                    ) : (
+                    <>
+                    <input 
+                        type="text" 
+                        style={{ margin: 8 }}
+                        placeholder="Ej. Comprar material para trabajar" 
+                        value={input}
+                        onChange={handleChange}
+                        ref={inputRef}
+                        className={classes.input}
+                    />
+                    <br/>
+                    <br/>
+                    <button 
+                        className={classes.button}
+                        value={input}
+                        onClick={handleChange}
+                    >
+                        Añadir Tarea
+                    </button>
+                    </>
+                    )
+                }
+                
             </form>
         </div>
     )
