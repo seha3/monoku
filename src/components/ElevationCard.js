@@ -5,14 +5,27 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import image from '../assets/mountains.png'
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    marginTop: '1rem'
   },
-  media: {
-    height: 140,
+  text: {
+    color: 'white',
+    textAlign: 'start',
+    marginTop: 0
   },
+  image: {
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    height: 120,
+    width: 325,
+  }
 });
 
 export default function MediaCard() {
@@ -22,19 +35,23 @@ export default function MediaCard() {
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
-          className={classes.media}
-          image="/assets/desgrr.jpg"
+          image={image}
           title="image"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h3">
+        <div className={classes.image}>
+          <img src={image} alt ="imagen" />
+        </div>
+        <CardContent className={classes.text}>
+          <Typography gutterBottom variant="subtitle1" color="textSecondary">
             Lunes 21 Diciembre 2020
           </Typography>
-          <Typography gutterBottom variant="h2" component="h2">
+          <Typography gutterBottom variant="h2">
             10:40am
           </Typography>
           <br/>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <br/>
+          <br/>
+          <Typography variant="body2">
             ¿Qué planeas hacer el día de hoy?
           </Typography>
         </CardContent>
