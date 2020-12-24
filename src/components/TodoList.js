@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import TodoForm from './TodoForm'
-import Todo from './Todo'
+import Task from './Task';
+import axios from 'axios';
 
 function TodoList() {
     const [todos, setTodos] = useState([])
@@ -16,34 +17,33 @@ function TodoList() {
         // console.log(todo, ...todos);
     };
 
-    const updateTodo = (todoId, newValue) => {
-        if (!newValue.text || /^\s*$/.test(newValue.text)) {
-            return;
-        }
-        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item))
-        );
-    }
+    //API monoku
+    useEffect(() => {
+        fetch()
+    }, [])
 
-    const removeTodo = id => {
-        const removeArr = [...todos].filter(todo => todo.id !== id)
-
-        setTodos(removeArr);
-    };
-
-    const completeTodo = id => {
-        let updatedTodos = todos.map(todo => {
-            if (todo.id === id) {
-                todo.isComplete = !todo.isComplete;
-            }
-            return todo;
-        });
-        setTodos(updatedTodos);
+    const fetch = async () => {
+        await axios.get('https://monoku-tasks.herokuapp.com/jtxfoXn2me1c7Tj7B8wn/all'
+          ).then(res => {
+              setTodos(res.data)
+              console.log(res)
+          }).catch(error => {
+            console.log(error.response);
+          });
     }
 
     return (
         <div>
             <TodoForm onSubmit={addTodo} />
-            <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
+            { todos.map((todo, index) => (
+                <Task 
+                    id={todo.id} 
+                    isComplete={todo.checked} 
+                    notes={todo.notes} 
+                    text={todo.text} 
+                    getTodo={fetch}
+                />
+            ))}
         </div>
     )
 }
